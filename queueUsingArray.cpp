@@ -99,7 +99,7 @@ int main()
             default:
                 cout<<"You have entered the wrong option\n";
                 break;
-            }
+        }
     }
     return 0;
 }
