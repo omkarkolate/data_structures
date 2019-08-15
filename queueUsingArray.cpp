@@ -83,23 +83,23 @@ int main()
 
         switch (choise)
         {
-		    case 1:
-		        enQueue(arr);
-		        break;
-		    
-		    case 2:
-		        deQueue(arr);
-		        break;
+            case 1:
+                enQueue(arr);
+                break;
+            
+            case 2:
+                deQueue(arr);
+                break;
 
-		    case 3:
-		        frontOfQueue(arr);
-		        break;
-		    case 4:
-		        exit(0);
-		    default:
-		        cout<<"You have entered the wrong option\n";
-		        break;
-        }
+            case 3:
+                frontOfQueue(arr);
+                break;
+            case 4:
+                exit(0);
+            default:
+                cout<<"You have entered the wrong option\n";
+                break;
+            }
     }
     return 0;
 }
