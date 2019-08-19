@@ -186,14 +186,13 @@ void postOrder()
     cout<<"\n";
 }
 
-void deleteNode(node *current,int key)
+void deleteNode(node *current,int key,node *prev)
 {
     if (current == NULL)
     {
         cout<<"Tree is empty!! :(\n";
         return;
     }
-    node *prev;
     while (current != NULL)
     {
         if(current->data == key)
@@ -256,14 +255,15 @@ void deleteNode(node *current,int key)
     //Case 3: Has Both Child 
     else
     {
+        prev = current;
         node *minNode = current->right;
         while (minNode->left != NULL)
+        {
+            prev = minNode;
             minNode = minNode->left;
+        }
         int min = minNode->data;
-        if(current->data == minNode->data)
-            deleteNode(current->right,minNode->data);
-        else
-            deleteNode(current,minNode->data);
+        deleteNode(minNode,minNode->data,prev);
         current->data = min;
     }
     return;   
@@ -311,7 +311,7 @@ int main()
                 int key;
                 cout<<"Enter data to be delete: ";
                 cin>>key;
-                deleteNode(root,key);
+                deleteNode(root,key,root);
                 break;
             case 7:
                 exit(0);
