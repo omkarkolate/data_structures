@@ -50,6 +50,11 @@ void insertNode()
 
 void search()
 {
+    if (root == NULL)
+    {
+        cout<<"Tree is empty!! :(\n";
+        return;
+    }
     cout<<"Enter data to search: ";
     int key;
     cin>>key;
@@ -80,7 +85,7 @@ void preOrder()
 {
     if (root == NULL)
     {
-        cout<<"Tree is empty!!\n";
+        cout<<"Tree is empty!! :(\n";
         return;
     }
     node *current = root;
@@ -109,7 +114,7 @@ void inorder()
 {
     if (root == NULL)
     {
-        cout<<"Tree is empty\n";
+        cout<<"Tree is empty!! :(\n";
         return;
     }
     node *current = root;
@@ -138,7 +143,7 @@ void postOrder()
 {
     if (root == NULL)
     {
-        cout<<"Tree is empty\n";
+        cout<<"Tree is empty!! :(\n";
         return;
     }
     node *current = root;
@@ -185,7 +190,7 @@ void deleteNode(node *current,int key)
 {
     if (current == NULL)
     {
-        cout<<"Tree is empty\n";
+        cout<<"Tree is empty!! :(\n";
         return;
     }
     node *prev;
@@ -209,48 +214,16 @@ void deleteNode(node *current,int key)
         cout<<"Data Not Found!!\n";
         return;
     }
-    else if (current == root)
-    {
-        //Case 1: Root has No child
-        if ((current->left == NULL) && (current->right == NULL))
-        {
-            root = NULL;
-            delete current;
-            cout<<"Node is deleted Successfully. <;)\n";
-            return;
-        }
-        //Case 2: Has One child
-        //Case 2.1: Has Right child
-        else if (current->left == NULL)
-        {
-            root = root->right;
-            delete current;
-            cout<<"Node is deleted Successfully. <;)\n";
-            return;
-        }
-        //Case 2.2: Has Left child
-        else if(current->right == NULL)
-        {
-            root = root->left;
-            delete current;
-            cout<<"Node is deleted Successfully. <;)\n";
-            return;
-        }    
-    }
-    
     //Case 1: Has No child
     if ((current->left == NULL) && (current->right == NULL))
     {
-        if (current->data <= prev->data)
-        {
+        if (current == root)
+            root = NULL;
+        else if (current->data <= prev->data)
             prev->left = NULL;
-            delete current;
-        }
         else
-        {
             prev->right = NULL;
-            delete current;
-        }
+        delete current;
         cout<<"Node is deleted Successfully. <;)\n"; 
     }
     //Case 2: Has One child
@@ -258,7 +231,9 @@ void deleteNode(node *current,int key)
     else if (current->left == NULL)
     {
         node *rightNode = current->right;
-        if(rightNode->data <= prev->data)
+        if (current == root)
+            root = root->right;
+        else if(rightNode->data <= prev->data)
             prev->left = rightNode;
         else
             prev->right = rightNode;
@@ -269,7 +244,9 @@ void deleteNode(node *current,int key)
     else if (current->right == NULL)
     {
         node *leftNode = current->left;
-        if(leftNode->data <= prev->data)
+        if (current == root)
+            root = root->left;
+        else if(leftNode->data <= prev->data)
             prev->left = leftNode;
         else
             prev->right = leftNode;
