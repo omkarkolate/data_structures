@@ -253,7 +253,7 @@ void deleteNode(node *current,int key)
         delete current;
         cout<<"Node is deleted Successfully. <;)\n";
     }
-    //Has Both Child 
+    //Case 3: Has Both Child 
     else
     {
         node *minNode = current->right;
