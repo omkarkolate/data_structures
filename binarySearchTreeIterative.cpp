@@ -1,5 +1,6 @@
 #include<iostream>
 #include<stack>
+#include<queue>
 using namespace std;
 
 struct node
@@ -186,6 +187,29 @@ void postOrder()
     cout<<"\n";
 }
 
+//Breadth first search
+void levelOrder()
+{
+    if(root == NULL)
+    {
+        cout<<"Tree is empty!! :(\n";
+        return;
+    }
+    queue <node*> que;
+    que.push(root);
+    while (!que.empty())
+    {
+        node *current = que.front();
+        cout<<current->data<<" ";
+        if(current->left != NULL)
+            que.push(current->left);
+        if(current->right != NULL)
+            que.push(current->right);
+        que.pop();
+    }
+    cout<<"\n";
+}
+
 void deleteNode(node *current,int key,node *prev)
 {
     if (current == NULL)
@@ -275,8 +299,9 @@ void menu()
     cout<<"3.Preorder Traversal\n";
     cout<<"4.Inorder Traversal\n";
     cout<<"5.Postorder Traversal\n";
-    cout<<"6.Delete Node\n";
-    cout<<"7.Exit\n";
+    cout<<"6.Level Order Traversal\n";
+    cout<<"7.Delete Node\n";
+    cout<<"8.Exit\n";
 }
 
 int main()
@@ -308,12 +333,15 @@ int main()
                 postOrder();
                 break;
             case 6:
+                levelOrder();
+                break;
+            case 7:
                 int key;
                 cout<<"Enter data to be delete: ";
                 cin>>key;
                 deleteNode(root,key,root);
                 break;
-            case 7:
+            case 8:
                 exit(0);
             default:
                 cout<<"You have entered wrong option\n";
